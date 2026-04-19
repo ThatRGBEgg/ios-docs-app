@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     <title>Docs</title>
@@ -11,35 +13,47 @@
     <header>
         <div class="header-content">
             <h1>Files</h1>
-            <div class="storage-info">
-                <span id="usage">0 MB</span> / 20 GB
-            </div>
+            <div class="storage-info" id="usage">0.0 GB / 20 GB</div>
         </div>
-        <div class="storage-card" id="main-storage-card">
+        <div class="storage-card" id="card">
             <div class="progress-container">
                 <div id="progress-bar"></div>
             </div>
-            <p id="storage-status">System Protected • 20GB Limit</p>
+            <p id="storage-status">Secure Vault • Hard Limit Active</p>
         </div>
     </header>
 
-    <main id="file-viewer">
+    <main id="tab-files" class="tab-content active">
         <div class="empty-state">
-            <div class="empty-icon">📁</div>
-            <p>No files yet</p>
-            <button class="connect-btn">Connect Storage</button>
+            <img src="https://cdn-icons-png.flaticon.com/512/10397/10397062.png" class="empty-icon" alt="folder">
+            <p style="color: var(--subtext); font-weight: 500;">No files found</p>
+            <button class="connect-btn" onclick="switchTab(event, 'settings')">Connect Storage</button>
+        </div>
+        <div style="height: 100vh;"></div> </main>
+
+    <main id="tab-convert" class="tab-content">
+        <div class="empty-state">
+            <div class="nav-icon" style="font-size: 48px;">⚡</div>
+            <p style="color: var(--subtext);">Converter Engine Ready</p>
+        </div>
+    </main>
+
+    <main id="tab-settings" class="tab-content">
+        <div class="empty-state">
+            <div class="nav-icon" style="font-size: 48px;">⚙️</div>
+            <p style="color: var(--subtext);">Settings Logic Loading...</p>
         </div>
     </main>
 
     <nav class="bottom-nav">
-        <button class="nav-item active" onclick="showTab(event, 'files')">
-            <span class="nav-icon">📁</span><br>Files
+        <button class="nav-item active" onclick="switchTab(event, 'files')">
+            <span class="nav-icon">📁</span>Files
         </button>
-        <button class="nav-item" onclick="showTab(event, 'convert')">
-            <span class="nav-icon">⚡</span><br>Convert
+        <button class="nav-item" onclick="switchTab(event, 'convert')">
+            <span class="nav-icon">⚡</span>Convert
         </button>
-        <button class="nav-item" onclick="showTab(event, 'settings')">
-            <span class="nav-icon">⚙️</span><br>Settings
+        <button class="nav-item" onclick="switchTab(event, 'settings')">
+            <span class="nav-icon">⚙️</span>Settings
         </button>
     </nav>
 
