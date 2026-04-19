@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <title>Docs App</title>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <h1>Files</h1>
+            <div id="storage-label">0 / 20 GB</div>
+        </div>
+        <div class="progress-container">
+            <div id="storage-bar"></div>
+        </div>
+    </header>
 
+    <main id="app-content">
+        <div class="empty-state">
+            <div class="icon">📁</div>
+            <p>No files yet</p>
+            <button class="action-btn">Connect Storage</button>
+        </div>
+    </main>
+
+    <nav class="tab-bar">
+        <button class="tab-item active">Files</button>
+        <button class="tab-item">Convert</button>
+        <button class="tab-item">Settings</button>
+    </nav>
+
+    <script src="app.js"></script>
+</body>
+</html>
