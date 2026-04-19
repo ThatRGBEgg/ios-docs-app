@@ -5,31 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
-    <title>Docs App</title>
+    <title>Docs</title>
 </head>
 <body>
     <header>
-        <div class="header-top">
+        <div class="header-content">
             <h1>Files</h1>
-            <div id="storage-label">0 / 20 GB</div>
+            <div class="storage-info">
+                <span id="usage">0 MB</span> / 20 GB
+            </div>
         </div>
-        <div class="progress-container">
-            <div id="storage-bar"></div>
+        <div class="storage-card" id="main-storage-card">
+            <div class="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            <p id="storage-status">System Protected • 20GB Limit</p>
         </div>
     </header>
 
-    <main id="app-content">
+    <main id="file-viewer">
         <div class="empty-state">
-            <div class="icon">📁</div>
+            <div class="empty-icon">📁</div>
             <p>No files yet</p>
-            <button class="action-btn">Connect Storage</button>
+            <button class="connect-btn">Connect Storage</button>
         </div>
     </main>
 
-    <nav class="tab-bar">
-        <button class="tab-item active">Files</button>
-        <button class="tab-item">Convert</button>
-        <button class="tab-item">Settings</button>
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="showTab(event, 'files')">
+            <span class="nav-icon">📁</span><br>Files
+        </button>
+        <button class="nav-item" onclick="showTab(event, 'convert')">
+            <span class="nav-icon">⚡</span><br>Convert
+        </button>
+        <button class="nav-item" onclick="showTab(event, 'settings')">
+            <span class="nav-icon">⚙️</span><br>Settings
+        </button>
     </nav>
 
     <script src="app.js"></script>
