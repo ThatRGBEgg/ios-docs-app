@@ -1,25 +1,39 @@
-/* app.js */
-function showTab(tabName) {
-    // Remove active class from all buttons
-    const buttons = document.querySelectorAll('.tab-btn');
-    buttons.forEach(btn => btn.classList.remove('active'));
+// app.js
 
-    // Find the clicked button by its text or icon and make it active
+function showTab(event, tabName) {
+    // Update active state in UI
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => item.classList.remove('active'));
+    
+    // Set the clicked element as active
     event.currentTarget.classList.add('active');
 
-    // Here we can later add code to swap the actual content of the page
-    console.log("Switched to tab: " + tabName);
+    // Logic for tab switching will go here
+    console.log(`Mapsd to: ${tabName}`);
 }
 
-// Keep the storage display function from before
-function updateStorage(usedMB) {
-    const totalMB = 20 * 1024;
+// Storage Failsafe Logic
+function updateStorageUI(usedMB) {
+    const totalMB = 20 * 1024; // 20 GB
     const percentage = (usedMB / totalMB) * 100;
-    const fill = document.getElementById('fill');
-    const usageText = document.getElementById('usage');
     
-    if(fill) fill.style.width = percentage + "%";
-    if(usageText) usageText.innerText = (usedMB / 1024).toFixed(1) + " / 20 GB";
+    const bar = document.getElementById('progress-bar');
+    const usageLabel = document.getElementById('usage');
+    const card = document.getElementById('main-storage-card');
+
+    if (bar) bar.style.width = percentage + "%";
+    if (usageLabel) usageLabel.innerText = (usedMB / 1024).toFixed(1) + " GB";
+
+    // Failsafe Visual: Turn Red if over 90%
+    if (percentage > 90) {
+        card.style.background = "#ff3b30"; // iOS Red
+    } else {
+        card.style.background = "var(--accent)";
+    }
 }
 
-updateStorage(2560); // Testing with 2.5GB
+// Initial Load
+document.addEventListener('DOMContentLoaded', () => {
+    // Start with a simulated value (e.g., 2.5 GB)
+    updateStorageUI(2560);
+});
