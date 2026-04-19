@@ -1,26 +1,25 @@
-// Initialize App
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Docs App Ready");
-    
-    // Simulate current storage usage
-    updateStorageDisplay(2.5); // Using 2.5 GB for example
-});
+/* app.js */
+function showTab(tabName) {
+    // Remove active class from all buttons
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
 
-function updateStorageDisplay(usedGB) {
-    const totalGB = 20;
-    const percentage = (usedGB / totalGB) * 100;
-    
-    const bar = document.getElementById('storage-bar');
-    const label = document.getElementById('storage-label');
-    
-    bar.style.width = percentage + "%";
-    label.innerText = usedGB + " / " + totalGB + " GB";
+    // Find the clicked button by its text or icon and make it active
+    event.currentTarget.classList.add('active');
 
-    // Failsafe: Hard cap at 20GB
-    if (usedGB >= totalGB) {
-        bar.style.background = "#ff3b30"; // iOS Red
-        label.style.color = "#ff3b30";
-        alert("STORAGE FULL: Failsafe triggered. You cannot upload more.");
-    }
+    // Here we can later add code to swap the actual content of the page
+    console.log("Switched to tab: " + tabName);
 }
 
+// Keep the storage display function from before
+function updateStorage(usedMB) {
+    const totalMB = 20 * 1024;
+    const percentage = (usedMB / totalMB) * 100;
+    const fill = document.getElementById('fill');
+    const usageText = document.getElementById('usage');
+    
+    if(fill) fill.style.width = percentage + "%";
+    if(usageText) usageText.innerText = (usedMB / 1024).toFixed(1) + " / 20 GB";
+}
+
+updateStorage(2560); // Testing with 2.5GB
