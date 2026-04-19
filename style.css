@@ -1,93 +1,136 @@
-/* style.css */
 :root {
-    /* Light Mode Palette */
-    --bg-color: #f2f2f7;
-    --card-bg: #ffffff;
-    --text-color: #000000;
-    --secondary-text: #8e8e93;
-    --ios-blue: #007AFF;
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --border-color: rgba(0, 0, 0, 0.1);
+    /* Light Mode */
+    --bg: #f2f2f7;
+    --card: #ffffff;
+    --text: #000000;
+    --subtext: #8e8e93;
+    --accent: #007AFF;
+    --glass: rgba(255, 255, 255, 0.7);
+    --border: rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Dark Mode Palette */
-        --bg-color: #000000;
-        --card-bg: #1c1c1e;
-        --text-color: #ffffff;
-        --secondary-text: #8e8e93;
-        --ios-blue: #0A84FF;
-        --glass-bg: rgba(28, 28, 30, 0.7);
-        --border-color: rgba(255, 255, 255, 0.1);
+        /* Dark Mode */
+        --bg: #000000;
+        --card: #1c1c1e;
+        --text: #ffffff;
+        --subtext: #8e8e93;
+        --accent: #0A84FF;
+        --glass: rgba(28, 28, 30, 0.7);
+        --border: rgba(255, 255, 255, 0.1);
     }
 }
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease;
+    font-family: -apple-system, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s ease;
     padding-bottom: env(safe-area-inset-bottom);
 }
 
 header {
-    padding: calc(env(safe-area-inset-top) + 20px) 20px 20px;
-    background: var(--glass-bg);
+    padding: calc(env(safe-area-inset-top) + 20px) 20px 15px;
+    background: var(--glass);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     position: sticky;
     top: 0;
     z-index: 100;
-    border-bottom: 0.5px solid var(--border-color);
+    border-bottom: 0.5px solid var(--border);
 }
 
-/* Premium Glassmorphism Storage Card */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 15px;
+}
+
+h1 { font-size: 32px; margin: 0; font-weight: 700; }
+
+.storage-info { font-size: 14px; color: var(--subtext); }
+
 .storage-card {
-    background: linear-gradient(135deg, var(--ios-blue), #5856D6);
+    background: var(--accent);
+    padding: 15px;
+    border-radius: 14px;
     color: white;
-    padding: 18px;
-    border-radius: 16px;
-    margin-top: 15px;
-    box-shadow: 0 8px 20px rgba(0, 122, 255, 0.2);
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+    transition: transform 0.1s ease;
 }
 
-.storage-card:active {
-    transform: scale(0.97); /* "Press" animation */
+.storage-card:active { transform: scale(0.96); }
+
+.progress-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    margin-bottom: 8px;
 }
 
-/* Tabs Animation & Glassmorphism */
-.bottom-tabs {
+#progress-bar {
+    width: 0%;
+    height: 100%;
+    background: white;
+    border-radius: 10px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#storage-status { font-size: 11px; margin: 0; opacity: 0.9; font-weight: 500; }
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+}
+
+.empty-icon { font-size: 64px; margin-bottom: 10px; opacity: 0.5; }
+
+.connect-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: transform 0.1s ease;
+}
+
+.connect-btn:active { transform: scale(0.94); }
+
+.bottom-nav {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: calc(65px + env(safe-area-inset-bottom));
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    height: calc(60px + env(safe-area-inset-bottom));
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     display: flex;
     justify-content: space-around;
-    border-top: 0.5px solid var(--border-color);
+    padding-bottom: env(safe-area-inset-bottom);
+    border-top: 0.5px solid var(--border);
 }
 
-.tab-btn {
-    border: none;
+.nav-item {
     background: none;
-    font-size: 11px;
-    color: var(--secondary-text);
-    transition: all 0.2s ease;
+    border: none;
+    font-size: 10px;
+    color: var(--subtext);
     padding-top: 10px;
     flex: 1;
+    transition: all 0.2s ease;
 }
 
-.tab-btn:active {
-    opacity: 0.5;
-    transform: scale(0.9);
-}
+.nav-item.active { color: var(--accent); }
 
-.tab-btn.active {
-    color: var(--ios-blue);
-    font-weight: 600;
-}
+.nav-item:active { transform: scale(0.85); opacity: 0.7; }
+
+.nav-icon { font-size: 22px; display: inline-block; margin-bottom: 2px; }
